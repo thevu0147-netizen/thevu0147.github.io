@@ -2,146 +2,123 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>For You 💖</title>
+<title>For Hồng Thứ 💖</title>
 
 <style>
 body {
   margin: 0;
   font-family: Arial;
-  background: black;
-  color: white;
-  text-align: center;
   overflow: hidden;
 }
 
-/* màn hình */
-.screen {
-  position: absolute;
-  width: 100%;
-  height: 100%;
+/* nền video */
+#bgVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1;
+}
+
+/* layout */
+.container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  flex-direction: column;
-  transition: 0.5s;
-}
-
-/* nút */
-button {
-  margin-top: 15px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 10px;
-  background: white;
-  color: black;
-  cursor: pointer;
-}
-
-/* màn chính */
-#main {
-  display: none;
-  background: linear-gradient(to right, #ff9a9e, #fad0c4);
+  height: 100vh;
+  padding: 20px;
+  color: white;
 }
 
 /* ảnh */
-img {
-  width: 170px;
-  height: 170px;
-  border-radius: 50%;
-  border: 4px solid white;
-  margin-bottom: 15px;
-  object-fit: cover;
-  opacity: 0;
-  transition: 1s;
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-/* text */
+.side img {
+  width: 160px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 15px;
+  border: 3px solid white;
+}
+
+/* giữa */
+.center {
+  text-align: center;
+  max-width: 400px;
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+
 #text {
   font-size: 18px;
   min-height: 120px;
-  padding: 0 20px;
-  opacity: 0;
-  transition: 1s;
 }
 
-/* trái tim */
-.heart {
+/* bóng bay */
+.balloon {
   position: absolute;
-  animation: float 5s linear infinite;
+  font-size: 25px;
+  animation: floatUp 6s linear infinite;
 }
 
-@keyframes float {
+@keyframes floatUp {
   from { transform: translateY(100vh); }
   to { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* tim */
+.heart {
+  position: absolute;
+  animation: floatUp 5s linear infinite;
 }
 </style>
 </head>
 
 <body>
 
-<!-- MÀN 1 -->
-<div class="screen" id="start">
-  <h2>Hình như có gì đó dành cho bạn 🎁</h2>
-  <button onclick="next1()">Xem thử không? 😏</button>
+<!-- nền video -->
+<video autoplay muted loop id="bgVideo">
+  <source src="https://cdn.pixabay.com/vimeo/458728398/gradient-43969.mp4?width=1280&hash=abc" type="video/mp4">
+</video>
+
+<div class="container">
+
+  <!-- bên trái -->
+  <div class="side">
+    <img src="LINK1">
+    <img src="LINK2">
+  </div>
+
+  <!-- giữa -->
+  <div class="center">
+    <h1>Happy Birthday Hồng Thứ 🎂</h1>
+    <div id="text"></div>
+  </div>
+
+  <!-- bên phải -->
+  <div class="side">
+    <img src="LINK3">
+    <img src="LINK4">
+  </div>
+
 </div>
-
-<!-- MÀN 2 -->
-<div class="screen" id="middle" style="display:none;">
-  <h2>Chuẩn bị tinh thần chưa…</h2>
-  <button onclick="openGift()">Rồi 😌</button>
-</div>
-
-<!-- MÀN CHÍNH -->
-<div class="screen" id="main">
-
-  <!-- 🔥 ẢNH (để trống, bạn thêm sau) -->
-  <img id="avatar" src="">
-
-  <h1>Happy Birthday 🎂</h1>
-
-  <div id="text"></div>
-
-</div>
-
-<!-- 🎶 NHẠC (bạn thay sau) -->
-<audio id="music" loop></audio>
 
 <script>
 
-// chuyển màn
-function next1() {
-  document.getElementById("start").style.display = "none";
-  document.getElementById("middle").style.display = "flex";
-}
-
-function openGift() {
-  document.getElementById("middle").style.display = "none";
-  document.getElementById("main").style.display = "flex";
-
-  document.getElementById("music").play();
-
-  // hiện ảnh
-  let img = document.getElementById("avatar");
-  img.style.opacity = 1;
-
-  // delay rồi hiện chữ
-  setTimeout(() => {
-    document.getElementById("text").style.opacity = 1;
-    typeEffect();
-  }, 800);
-}
-
-// nội dung chữ (bạn có thể sửa sau)
+// lời chúc
 const message = [
   "Chúc bạn một ngày thật vui vẻ 💖",
-  "Mong là hôm nay sẽ có nhiều điều dễ thương xảy ra",
+  "Mong là hôm nay sẽ có thật nhiều điều dễ thương",
   "",
-  "Thật ra ban đầu chỉ định làm đơn giản thôi",
-  "nhưng nghĩ lại…",
-  "",
-  "có những người",
-  "dù không nói nhiều",
-  "nhưng lại khiến người khác nhớ khá lâu 😌"
+  "Không cần gì quá lớn lao",
+  "chỉ cần bạn luôn vui là được 😌"
 ];
 
 let i = 0, j = 0;
@@ -161,16 +138,27 @@ function typeEffect() {
   }
 }
 
-// trái tim nhẹ
+typeEffect();
+
+// bóng bay 🎈
 setInterval(() => {
-  let heart = document.createElement("div");
-  heart.innerHTML = "💗";
-  heart.className = "heart";
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.fontSize = (14 + Math.random() * 18) + "px";
-  document.body.appendChild(heart);
-  setTimeout(() => heart.remove(), 5000);
-}, 500);
+  let b = document.createElement("div");
+  b.innerHTML = "🎈";
+  b.className = "balloon";
+  b.style.left = Math.random() * 100 + "vw";
+  document.body.appendChild(b);
+  setTimeout(() => b.remove(), 6000);
+}, 700);
+
+// tim 💖
+setInterval(() => {
+  let h = document.createElement("div");
+  h.innerHTML = "💗";
+  h.className = "heart";
+  h.style.left = Math.random() * 100 + "vw";
+  document.body.appendChild(h);
+  setTimeout(() => h.remove(), 5000);
+}, 400);
 
 </script>
 
