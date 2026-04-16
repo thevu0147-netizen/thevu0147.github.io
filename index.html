@@ -2,36 +2,46 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Happy Birthday 💖</title>
+<title>Happy Birthday Hồng Thứ 💖</title>
+
 <style>
 body {
   margin: 0;
-  overflow: hidden;
   font-family: Arial;
   background: linear-gradient(to right, #ff9a9e, #fad0c4);
   text-align: center;
   color: white;
+  overflow: hidden;
 }
-  
+
 .container {
   position: relative;
-  top: 28%;
-  padding: 0 20px;
+  top: 15%;
+  padding: 20px;
+}
+
+img {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid white;
+  margin-bottom: 15px;
 }
 
 h1 {
-  font-size: 42px;
+  font-size: 36px;
 }
 
-p {
+#text {
   font-size: 18px;
-  line-height: 1.6;
+  min-height: 100px;
+  white-space: pre-line;
 }
 
 button {
   margin-top: 15px;
   padding: 10px 20px;
-  font-size: 16px;
   border: none;
   border-radius: 10px;
   background: white;
@@ -46,51 +56,76 @@ button {
 }
 
 @keyframes float {
-  from {
-    transform: translateY(100vh);
-    opacity: 1;
-  }
-  to {
-    transform: translateY(-10vh);
-    opacity: 0;
-  }
+  from { transform: translateY(100vh); }
+  to { transform: translateY(-10vh); opacity: 0; }
 }
 </style>
 </head>
+
 <body>
 
 <div class="container">
+
+  <!-- 🔥 THAY LINK ẢNH Ở ĐÂY -->
+  <img src="https://i.imgur.com/your-image.jpg">
+
   <h1>🎂 Happy Birthday Hồng Thứ!</h1>
-  <p>
-    Chúc bạn có một ngày sinh nhật thật vui vẻ,  
-    nhiều tiếng cười và những điều dễ thương 💖  
-    <br><br>
-    Mong là năm nay sẽ có thêm nhiều kỷ niệm đẹp nữa đến với bạn.
-  </p>
-  <button onclick="showMessage()">Bấm thử đi 😏</button>
+
+  <div id="text"></div>
+
+  <button onclick="showFull()">Xem hết nè 😏</button>
+
 </div>
 
+<!-- 🔥 THAY LINK NHẠC Ở ĐÂY -->
 <audio autoplay loop>
-  <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+  <source src="https://www.bensound.com/bensound-music/bensound-love.mp3">
 </audio>
 
 <script>
-function showMessage() {
-  alert("À… người làm cái này chắc cũng mong bạn vui là chính thôi 😌");
+const message = [
+  "Chúc bạn một ngày thật vui vẻ 💖",
+  "Mong là hôm nay sẽ có thật nhiều tiếng cười",
+  "Và thêm nhiều điều dễ thương xảy ra với bạn",
+  "",
+  "À… thật ra người làm cái này",
+  "cũng hy vọng mình có thể góp 1 phần nhỏ trong ngày của bạn 😌"
+];
+
+let i = 0;
+let j = 0;
+
+function typeEffect() {
+  if (i < message.length) {
+    if (j < message[i].length) {
+      document.getElementById("text").innerHTML += message[i][j];
+      j++;
+      setTimeout(typeEffect, 40);
+    } else {
+      document.getElementById("text").innerHTML += "<br>";
+      i++;
+      j = 0;
+      setTimeout(typeEffect, 300);
+    }
+  }
 }
 
-// trái tim bay nhẹ nhàng
+typeEffect();
+
+function showFull() {
+  alert("Sinh nhật vui vẻ nha Hồng Thứ 🎂💖");
+}
+
+// trái tim bay
 setInterval(() => {
   let heart = document.createElement("div");
   heart.innerHTML = "💗";
   heart.className = "heart";
   heart.style.left = Math.random() * 100 + "vw";
-  heart.style.fontSize = (18 + Math.random() * 18) + "px";
+  heart.style.fontSize = (15 + Math.random() * 20) + "px";
   document.body.appendChild(heart);
 
-  setTimeout(() => {
-    heart.remove();
-  }, 5000);
+  setTimeout(() => heart.remove(), 5000);
 }, 400);
 </script>
 
