@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday 💖</title>
+<style>
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: Arial;
+  background: linear-gradient(to right, #ff9a9e, #fad0c4);
+  text-align: center;
+  color: white;
+}
+  
+.container {
+  position: relative;
+  top: 28%;
+  padding: 0 20px;
+}
+
+h1 {
+  font-size: 42px;
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  background: white;
+  color: #ff4b5c;
+  cursor: pointer;
+}
+
+/* trái tim */
+.heart {
+  position: absolute;
+  animation: float 5s linear infinite;
+}
+
+@keyframes float {
+  from {
+    transform: translateY(100vh);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-10vh);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>🎂 Happy Birthday Hồng Thứ!</h1>
+  <p>
+    Chúc bạn có một ngày sinh nhật thật vui vẻ,  
+    nhiều tiếng cười và những điều dễ thương 💖  
+    <br><br>
+    Mong là năm nay sẽ có thêm nhiều kỷ niệm đẹp nữa đến với bạn.
+  </p>
+  <button onclick="showMessage()">Bấm thử đi 😏</button>
+</div>
+
+<audio autoplay loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function showMessage() {
+  alert("À… người làm cái này chắc cũng mong bạn vui là chính thôi 😌");
+}
+
+// trái tim bay nhẹ nhàng
+setInterval(() => {
+  let heart = document.createElement("div");
+  heart.innerHTML = "💗";
+  heart.className = "heart";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (18 + Math.random() * 18) + "px";
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 5000);
+}, 400);
+</script>
+
+</body>
+</html>
