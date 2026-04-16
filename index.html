@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>For Hồng Thứ 💖</title>
+<title>For You 💖</title>
 
 <style>
 body {
@@ -14,6 +14,7 @@ body {
   overflow: hidden;
 }
 
+/* màn hình */
 .screen {
   position: absolute;
   width: 100%;
@@ -22,36 +23,45 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  transition: 0.5s;
 }
 
+/* nút */
 button {
-  padding: 12px 25px;
-  font-size: 16px;
+  margin-top: 15px;
+  padding: 10px 20px;
   border: none;
   border-radius: 10px;
-  background: #ff4b5c;
-  color: white;
+  background: white;
+  color: black;
   cursor: pointer;
 }
 
+/* màn chính */
 #main {
   display: none;
   background: linear-gradient(to right, #ff9a9e, #fad0c4);
 }
 
+/* ảnh */
 img {
-  width: 180px;
-  height: 180px;
+  width: 170px;
+  height: 170px;
   border-radius: 50%;
-  margin-bottom: 15px;
   border: 4px solid white;
+  margin-bottom: 15px;
   object-fit: cover;
+  opacity: 0;
+  transition: 1s;
 }
 
+/* text */
 #text {
   font-size: 18px;
-  min-height: 100px;
+  min-height: 120px;
   padding: 0 20px;
+  opacity: 0;
+  transition: 1s;
 }
 
 /* trái tim */
@@ -69,42 +79,69 @@ img {
 
 <body>
 
-<!-- MÀN ĐẦU -->
+<!-- MÀN 1 -->
 <div class="screen" id="start">
-  <h2>🎁 Có một điều dành cho bạn</h2>
-  <button onclick="openGift()">Mở ra xem thử 😏</button>
+  <h2>Hình như có gì đó dành cho bạn 🎁</h2>
+  <button onclick="next1()">Xem thử không? 😏</button>
+</div>
+
+<!-- MÀN 2 -->
+<div class="screen" id="middle" style="display:none;">
+  <h2>Chuẩn bị tinh thần chưa…</h2>
+  <button onclick="openGift()">Rồi 😌</button>
 </div>
 
 <!-- MÀN CHÍNH -->
 <div class="screen" id="main">
 
-  <!-- 🔥 THAY LINK ẢNH Ở ĐÂY -->
-  <img src="LINK_ANH_GITHUB">
+  <!-- 🔥 ẢNH (để trống, bạn thêm sau) -->
+  <img id="avatar" src="">
 
-  <h1>Happy Birthday Hồng Thứ 🎂</h1>
+  <h1>Happy Birthday 🎂</h1>
 
   <div id="text"></div>
 
 </div>
 
-<!-- 🎶 NHẠC WENDY -->
-<iframe width="0" height="0"
-src="https://www.youtube.com/embed/L1rR_smhD78?autoplay=1&loop=1&playlist=L1rR_smhD78"
-frameborder="0" allow="autoplay"></iframe>
+<!-- 🎶 NHẠC (bạn thay sau) -->
+<audio id="music" loop></audio>
 
 <script>
-function openGift() {
+
+// chuyển màn
+function next1() {
   document.getElementById("start").style.display = "none";
-  document.getElementById("main").style.display = "flex";
-  typeEffect();
+  document.getElementById("middle").style.display = "flex";
 }
 
+function openGift() {
+  document.getElementById("middle").style.display = "none";
+  document.getElementById("main").style.display = "flex";
+
+  document.getElementById("music").play();
+
+  // hiện ảnh
+  let img = document.getElementById("avatar");
+  img.style.opacity = 1;
+
+  // delay rồi hiện chữ
+  setTimeout(() => {
+    document.getElementById("text").style.opacity = 1;
+    typeEffect();
+  }, 800);
+}
+
+// nội dung chữ (bạn có thể sửa sau)
 const message = [
   "Chúc bạn một ngày thật vui vẻ 💖",
-  "Mong là hôm nay sẽ có thật nhiều điều dễ thương xảy ra",
+  "Mong là hôm nay sẽ có nhiều điều dễ thương xảy ra",
   "",
-  "Cảm ơn vì đã xuất hiện trong cuộc sống này",
-  "dù chỉ là một phần nhỏ thôi 😌"
+  "Thật ra ban đầu chỉ định làm đơn giản thôi",
+  "nhưng nghĩ lại…",
+  "",
+  "có những người",
+  "dù không nói nhiều",
+  "nhưng lại khiến người khác nhớ khá lâu 😌"
 ];
 
 let i = 0, j = 0;
@@ -124,17 +161,17 @@ function typeEffect() {
   }
 }
 
-// trái tim bay
+// trái tim nhẹ
 setInterval(() => {
   let heart = document.createElement("div");
   heart.innerHTML = "💗";
   heart.className = "heart";
   heart.style.left = Math.random() * 100 + "vw";
-  heart.style.fontSize = (15 + Math.random() * 20) + "px";
+  heart.style.fontSize = (14 + Math.random() * 18) + "px";
   document.body.appendChild(heart);
-
   setTimeout(() => heart.remove(), 5000);
-}, 400);
+}, 500);
+
 </script>
 
 </body>
